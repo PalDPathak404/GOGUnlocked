@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ - GOG Unlocked</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: #0b0014;
+      color: white;
+      min-height: 100vh;
+    }
+
+    header {
+      position: relative;
+      padding-top: 20px;
+    }
+
+    .logo {
+      position: absolute;
+      top: 10px;
+      z-index: 10;
+    }
+
+    .logo img {
+      height: 50px;
+      width: auto;
+    }
+
+    @media (min-width: 1130px) {
+      .logo {
+        left: calc((100vw - 1100px) / 2 + 20px);
+      }
+    }
+
+    @media (min-width: 991px) and (max-width: 1129px) {
+      .logo {
+        left: calc(5vw + 20px);
+      }
+    }
+
+    .navbar-container {
+      background: linear-gradient(90deg, #7b2cbf, #9d4edd);
+      max-width: 1100px;
+      width: 90%;
+      margin: 0 auto;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .navbar {
+      display: flex;
+      gap: 30px;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      white-space: nowrap;
+    }
+
+    .navbar a:hover {
+      color: #e0aaff;
+    }
+
+    .breadcrumb {
+      max-width: 1100px;
+      width: 90%;
+      margin: 0 auto;
+      padding: 15px 20px;
+      background: rgba(123, 44, 191, 0.2);
+      font-size: 14px;
+    }
+
+    .breadcrumb a {
+      color: #9d4edd;
+      text-decoration: none;
+    }
+
+    .breadcrumb span {
+      color: white;
+    }
+
+    .faq-container {
+      max-width: 1100px;
+      width: 90%;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .faq-item {
+      background: #f5f5f5;
+      margin-bottom: 2px;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .faq-toggle {
+      display: none;
+    }
+
+    .faq-question {
+      padding: 18px 25px;
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .faq-question:hover {
+      background: #e8e8e8;
+    }
+
+    .faq-icon {
+      color: #666;
+      font-size: 20px;
+      font-weight: 700;
+      width: 20px;
+      text-align: center;
+    }
+
+    .faq-icon::before {
+      content: '+';
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 25px 0 60px;
+      color: #444;
+      font-size: 15px;
+      line-height: 1.7;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+
+    .faq-toggle:checked + .faq-question .faq-icon::before {
+      content: '−';
+    }
+
+    .faq-toggle:checked ~ .faq-answer {
+      max-height: 1000px;
+      padding: 0 25px 20px 60px;
+    }
+
+    @media (max-width: 990px) {
+      header {
+        padding-top: 10px;
+      }
+
+      .logo {
+        position: static;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 15px;
+      }
+
+      .logo img {
+        height: 45px;
+      }
+
+      .navbar-container {
+        flex-direction: column;
+        padding: 12px 20px;
+        width: 95%;
+      }
+
+      .navbar {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .navbar a {
+        font-size: 14px;
+      }
+
+      .faq-question {
+        padding: 15px 20px;
+        font-size: 15px;
+      }
+
+      .faq-toggle:checked ~ .faq-answer {
+        padding: 0 20px 15px 50px;
+        font-size: 14px;
+      }
+    }
+    .footer {
+  background: #0a0a14;
+  margin-top: 80px;
+  padding: 60px 0 30px;
+  border-top: 1px solid #1a1a2e;
+}
+
+.footer-content {
+  max-width: 1100px;
+  width: 90%;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.footer-mission {
+  margin-bottom: 80px;
+}
+
+.footer-title {
+  color: #9d4edd;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+}
+
+.footer-divider {
+  width: 350px;
+  height: 3px;
+  background: linear-gradient(90deg, #7b2cbf, #9d4edd);
+  margin-bottom: 25px;
+}
+
+.footer-text {
+  color: #d4d4d4;
+  font-size: 16px;
+  line-height: 1.8;
+  max-width: 600px;
+}
+
+.footer-text strong {
+  color: white;
+  font-weight: 700;
+}
+
+.footer-bottom {
+  border-top: 1px solid #1a1a2e;
+  padding-top: 25px;
+}
+
+.footer-copyright {
+  color: #666;
+  font-size: 14px;
+}
+
+/* Footer responsive */
+@media (max-width: 990px) {
+  .footer {
+    margin-top: 60px;
+    padding: 40px 0 20px;
+  }
+
+  .footer-content {
+    padding: 0 20px;
+  }
+
+  .footer-mission {
+    margin-bottom: 50px;
+  }
+
+  .footer-title {
+    font-size: 18px;
+  }
+
+  .footer-divider {
+    width: 250px;
+  }
+
+  .footer-text {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-divider {
+    width: 200px;
+  }
+
+  .footer-text {
+    font-size: 14px;
+  }
+}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="https://res.cloudinary.com/diekdvh6t/image/upload/v1760857353/goglogo_y04g8n.webp" alt="GOG Unlocked">
+    </div>
+
+    <div class="navbar-container">
+      <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="contact-us.html">Contact Us</a>
+        <a href="categories.html">Categories</a>
+        <a href="faq.html">FAQ</a>
+        <a href="latest-news.html">Latest News</a>
+        <a href="request-games.html">Request Games</a>
+        <a href="request-updates.html">Request Updates</a>
+        <a href="tech-support.html">Technical Support</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="breadcrumb">
+    <a href="index.html">Home</a> » <span>FAQ</span>
+  </div>
+
+  <div class="faq-container">
+    <div class="faq-item">
+      <input type="checkbox" id="faq1" class="faq-toggle">
+      <label for="faq1" class="faq-question">
+        <span class="faq-icon"></span>
+        <span>What is gogunlocked?</span>
+      </label>
+      <div class="faq-answer">
+        gogunlocked.com is a platform to download all your favorite games on GOG without the cost. Each game is DRM-free meaning you don't need any sort of cracks or license keys for the game to work.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <input type="checkbox" id="faq2" class="faq-toggle">
+      <label for="faq2" class="faq-question">
+        <span class="faq-icon"></span>
+        <span>Is this site safe? Are there any viruses?</span>
+      </label>
+      <div class="faq-answer">
+        This site is 100% safe to download from. There are no viruses. Each game comes directly from GOG.com, which is a simple installer and directly playable through the desktop shortcut.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <input type="checkbox" id="faq3" class="faq-toggle">
+      <label for="faq3" class="faq-question">
+        <span class="faq-icon"></span>
+        <span>Why is my download so slow?</span>
+      </label>
+      <div class="faq-answer">
+        There could be multiple reasons your download is slow, such as congested servers or simply your internet connection isn't good enough to reach the servers at full potential. However.. there's a neat workaround to maximize download speeds. You can use a download manager such as FDM, JDownloader, or IDM. Any one of these download managers will give you maximum potential speeds by utilizing your bandwidth and connection.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <input type="checkbox" id="faq4" class="faq-toggle">
+      <label for="faq4" class="faq-question">
+        <span class="faq-icon"></span>
+        <span>Can you provide torrent downloads for every game?</span>
+      </label>
+      <div class="faq-answer">
+        Unfortunately we won't add torrents to every game. Torrent option will only be available for larger games. Smaller games are usually several hundred megabytes and can be downloaded quickly.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <input type="checkbox" id="faq5" class="faq-toggle">
+      <label for="faq5" class="faq-question">
+        <span class="faq-icon"></span>
+        <span>Why did my antivirus program picked up the game as a threat/virus?</span>
+      </label>
+      <div class="faq-answer">
+        This is a false positive. Some anti-virus detect the game files wrongfully. As mentioned, each game directly comes from gog.com which is 100% clean. We have no reason to spread malware or infect you.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <input type="checkbox" id="faq6" class="faq-toggle">
+      <label for="faq6" class="faq-question">
+        <span class="faq-icon"></span>
+        <span>What is the difference between steamunlocked and gogunlocked?</span>
+      </label>
+      <div class="faq-answer">
+       Steamunlocked contains a bigger library of games which include steam, classics, and origin games. Gogunlocked is purely for gog games. If a game you want isn't on this site, you can check out steamunlocked.net.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <input type="checkbox" id="faq7" class="faq-toggle">
+      <label for="faq7" class="faq-question">
+        <span class="faq-icon"></span>
+        <span>Do you accept donations?</span>
+      </label>
+      <div class="faq-answer">
+        No we do not. We just want to provide the community a collection of games without taking anything away from you. If you love our work, support us by sharing this site with all your friends and family.
+      </div>
+    </div>
+  </div>
+<footer class="footer">
+    <div class="footer-content">
+      <div class="footer-mission">
+        <h3 class="footer-title">OUR MISSION</h3>
+        <div class="footer-divider"></div>
+        <p class="footer-text">
+          We believe in DRM-FREE gaming. That's why we launched GOG Unlocked so you (as a user) can test out a game before deciding on purchasing it! Developers work incredibly hard to create amazing PC games just for you. If you love a game, we highly encourage you to purchase it on the <strong>official store</strong>.
+        </p>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2025 GOG Unlocked</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
