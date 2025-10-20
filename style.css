@@ -426,6 +426,12 @@ header {
   .rpg {
     padding: 0 20px;
   }
+  .open-world{
+    padding: 0 20px;
+  }
+  .horror{
+    padding: 0 20px;
+  }
 
   .section-title {
     font-size: 26px;
